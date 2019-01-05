@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+html,body{
+    text-align: center;
+    height: 100%;
+    
+}
+.bg
+{
+    background-image: url("ss.jpg");
+    height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+
+}
+#credit
+{
+z-index: 2px;
+margin-top:40% ;
+
+color:white;
+}
+#heading
+{
+  font-family: consolas;  
+}
+#w
+{
+    margin-top:15%; 
+}
+#submit
+{
+    width:20%;
+}
+#s
+{
+    margin-left: -90%;
+    color:white;
+}
+#d
+{
+    background-color: crimson;
+    
+    color: aliceblue; 
+}
+</style>
+    <title>Document</title>
+</head>
+<body>
+        <div class="bg">
+    <div class="container col-md-3"></div>
+            
+                    <div class="container col-md-6" id="w">
+                            <h1 id="heading">HOMEFLIX!</h1>
+                            <h3 id="s">Login-</h3>
+        <form id="t">
+          <div class="form-group">
+            <input type="text" class="form-control btn-primary" id="usr" placeholder="Usename">
+          </div>
+          <div class="form-group">
+           
+            <input type="password" class="form-control btn-danger" id="pwd" placeholder="Password">
+            <br>
+            <input type="submit" id="submit" class="btn btn-warning" value="Login">
+          </div>
+          <div class="alert-danger">Wrong Username or Password</div>
+        </form>
+        <span id="d"> &nbsp&nbsp   New User! <a href="signup">Sign Up! &nbsp&nbsp </a></span>
+        <p id="credit">Photo by Yvette de Wit on Unsplash</p>
+      </div>
+      <div class="container col-md-3"></div>
+      </div>
+    <script>
+    $("#usr").focusin(()=>{
+        $(".alert-danger").hide();
+    })
+    $(".alert-danger").hide();
+    $("#t").submit((e)=>{e.preventDefault();
+        
+        var loginData={
+            userName:$("#usr").val(),
+            password:$("#pwd").val(),
+            type:"login"
+        }
+        $.ajax({
+  type: "POST",
+  url: "/login",
+  data: JSON.stringify(loginData),
+  contentType: 'application/json',
+  success: (res)=>{window.location="/index"},
+  error:()=>{ $(".alert-danger").show()}
+});
+    })
+    </script>
+</body>
+</html>
